@@ -24,21 +24,6 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<String> viewSentMessage(User sender) {
-        System.out.println("Calling View Sent");
-        List<Message> messages = messageRepository.findBySenderId(sender.getId());
-        System.out.println("Messages:"+messages);
-        List<String> list = new ArrayList<>();
-        messages.forEach(m -> list.add(m.getContent()));
-        return list;
-    }
-
-    @Override
-    public List<String> viewReceivedMessage(Long senderId, Long receiverId) {
-        return null;
-    }
-
-    @Override
     public List<Message> viewMessage() {
         return messageRepository.findAll();
     }

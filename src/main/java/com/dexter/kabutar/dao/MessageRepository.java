@@ -19,6 +19,4 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
     @Override
     List<Message> findAll();
 
-//    @Query(value = "select m.content from Message m where m.sender =: senderId")
-    List<Message> findBySenderId(Long senderId);
 }
