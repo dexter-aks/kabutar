@@ -1,7 +1,6 @@
 package com.dexter.kabutar.dao;
 
 import com.dexter.kabutar.domain.Message;
-import com.dexter.kabutar.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

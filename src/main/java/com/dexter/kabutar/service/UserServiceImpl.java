@@ -7,8 +7,7 @@ import com.dexter.kabutar.model.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -17,22 +16,16 @@ public class UserServiceImpl implements UserService{
     private UserRepository userRepository;
 
     @Override
-    public User save(UserInfo userInfo) throws NickNameAlreadyExistException {
+    public User create(UserInfo userInfo) throws NickNameAlreadyExistException {
         try{
             return userRepository.save(new User(userInfo.getNickName()));
         }catch(Exception exception){
             throw new NickNameAlreadyExistException();
         }
-
     }
 
     @Override
-    public User findById(Long id) {
-        Optional<User> userOptional = userRepository.findById(id);
-        if(userOptional.isPresent()){
-            return userOptional.get();
-        }else{
-            throw new NoSuchElementException();
-        }
+    public List<User> findUsers() {
+        return userRepository.findAll();
     }
 }

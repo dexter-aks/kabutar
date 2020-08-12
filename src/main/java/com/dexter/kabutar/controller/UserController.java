@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -26,7 +25,7 @@ public class UserController {
     @PostMapping(path = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity create(@RequestBody UserInfo userInfo){
         try{
-            User user = userService.save(userInfo);
+            User user = userService.create(userInfo);
             return ok(user);
         }catch(NickNameAlreadyExistException existException){
             Map<String, String> error = new HashMap<>();
@@ -35,15 +34,9 @@ public class UserController {
         }
     }
 
-    @GetMapping(path = "/search/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity findById(@PathVariable(name = "id") Long id){
-        try{
-            return ResponseEntity.ok(userService.findById(id));
-        }catch(NoSuchElementException elementException){
-            Map<String, String> error = new HashMap<>();
-            error.put("message","User Not found");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-        }
+    @GetMapping(path = "/search/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity findUsers(){
 
+        return ResponseEntity.ok(userService.findUsers());
     }
 }

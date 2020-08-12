@@ -38,13 +38,4 @@ public class UserIntegrationTest {
                 .andExpect(jsonPath("$.nickName").value("Ankit"));
 
     }
-
-    @Test
-    public void successfullyFindUserById() throws Exception {
-        this.mockMvc.perform(get("/user/search/1"))
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.nickName").value("Ankit"));
-    }
 }

@@ -4,9 +4,11 @@ import com.dexter.kabutar.domain.User;
 import com.dexter.kabutar.exception.NickNameAlreadyExistException;
 import com.dexter.kabutar.model.UserInfo;
 
+import java.util.List;
+
 public interface UserService {
 
-    User save(UserInfo userInfo) throws NickNameAlreadyExistException;
+    User create(UserInfo userInfo) throws NickNameAlreadyExistException;
 
-    User findById(Long id);
+    List<User> findUsers();
 }
