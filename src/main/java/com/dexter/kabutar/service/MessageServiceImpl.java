@@ -1,8 +1,11 @@
 package com.dexter.kabutar.service;
 
 import com.dexter.kabutar.dao.MessageRepository;
+import com.dexter.kabutar.dao.UserRepository;
 import com.dexter.kabutar.domain.Message;
+import com.dexter.kabutar.domain.User;
 import com.dexter.kabutar.exception.InvalidRequestException;
+import com.dexter.kabutar.model.MessageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,26 +17,37 @@ public class MessageServiceImpl implements MessageService {
     @Autowired
     private MessageRepository messageRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
-    public void send(Message message)
-            throws InvalidRequestException {
-        if (message.getSender().equals(message.getReceiver())) throw new InvalidRequestException();
+    public void send(MessageInfo messageInfo) throws InvalidRequestException {
+        String senderNickName = messageInfo.getSenderNickName();
+        String receiverNickName = messageInfo.getReceiverNickName();
+
+        if (senderNickName.equals(receiverNickName))
+            throw new InvalidRequestException();
+
+        User sender = userRepository.findByNickName(senderNickName);
+        User receiver = userRepository.findByNickName(receiverNickName);
+        Message message = new Message(messageInfo.getContent(), sender, receiver);
         messageRepository.save(message);
     }
 
     @Override
-    public List<String> viewSentMessage(Long senderId) {
-        List<String> messages = messageRepository.findBySenderId(senderId);
-        return messages;
+    public List<String> viewSentMessage(String senderNickName) {
+        return messageRepository.findBySenderNickName(senderNickName);
     }
 
     @Override
-    public List<String> viewReceivedMessage(Long receiverId, Long senderId) {
-        if(senderId == null) return viewReceivedMessage(receiverId);
-        return messageRepository.findByReceiverSenderId(receiverId, senderId);
+    public List<String> viewReceivedMessage(String receiverNickName, String senderNickName) {
+        if(senderNickName == null || senderNickName.isEmpty())
+            return viewReceivedMessage(receiverNickName);
+
+        return messageRepository.findByReceiverSenderNickName(receiverNickName, senderNickName);
     }
 
-    private List<String> viewReceivedMessage(Long receiverId){
-        return messageRepository.findByReceiverId(receiverId);
+    private List<String> viewReceivedMessage(String receiverId){
+        return messageRepository.findByReceiverNickName(receiverId);
     }
 }

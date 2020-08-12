@@ -12,13 +12,13 @@ import java.util.List;
 @Transactional
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
-    @Query(value = "select m.content from Message m where m.sender.id = :senderId")
-    List<String> findBySenderId(Long senderId);
+    @Query(value = "select m.content from Message m where m.sender.nickName = :senderNickName")
+    List<String> findBySenderNickName(String senderNickName);
 
-    @Query(value = "select m.content from Message m where m.receiver.id = :receiverId")
-    List<String> findByReceiverId(Long receiverId);
+    @Query(value = "select m.content from Message m where m.receiver.nickName = :receiverNickName")
+    List<String> findByReceiverNickName(String receiverNickName);
 
-    @Query(value = "select m.content from Message m where m.receiver.id = :receiverId and m.sender.id = :senderId")
-    List<String> findByReceiverSenderId(Long receiverId, Long senderId);
+    @Query(value = "select m.content from Message m where m.receiver.nickName = :receiverNickName and m.sender.nickName = :senderNickName")
+    List<String> findByReceiverSenderNickName(String receiverNickName, String senderNickName);
 
 }

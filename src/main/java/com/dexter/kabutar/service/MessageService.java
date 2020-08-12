@@ -1,16 +1,16 @@
 package com.dexter.kabutar.service;
 
-import com.dexter.kabutar.domain.Message;
 import com.dexter.kabutar.exception.InvalidRequestException;
+import com.dexter.kabutar.model.MessageInfo;
 
 import java.util.List;
 
 public interface MessageService {
 
-    void send(Message message) throws InvalidRequestException;
+    void send(MessageInfo messageInfo) throws InvalidRequestException;
 
-    List<String>  viewSentMessage(Long senderId);
+    List<String>  viewSentMessage(String senderNickName);
 
-    List<String> viewReceivedMessage(Long receiverId, Long senderId);
+    List<String> viewReceivedMessage(String receiverNickName, String senderNickName);
 
 }
