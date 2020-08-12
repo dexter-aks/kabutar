@@ -12,12 +12,6 @@ import java.util.List;
 @Transactional
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
-    @Override
-    <S extends Message> S save(S entity);
-
-    @Override
-    List<Message> findAll();
-
     @Query(value = "select m.content from Message m where m.sender.id = :senderId")
     List<String> findBySenderId(Long senderId);
 

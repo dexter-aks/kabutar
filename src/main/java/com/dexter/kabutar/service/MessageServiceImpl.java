@@ -22,11 +22,6 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Message> viewMessage() {
-        return messageRepository.findAll();
-    }
-
-    @Override
     public List<String> viewSentMessage(Long senderId) {
         List<String> messages = messageRepository.findBySenderId(senderId);
         return messages;

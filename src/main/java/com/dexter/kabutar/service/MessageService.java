@@ -9,8 +9,6 @@ public interface MessageService {
 
     void send(Message message) throws InvalidRequestException;
 
-    List<Message> viewMessage();
-
     List<String>  viewSentMessage(Long senderId);
 
     List<String> viewReceivedMessage(Long receiverId, Long senderId);

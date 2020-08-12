@@ -30,19 +30,6 @@ public class MessageController {
         }
     }
 
-    @GetMapping(path = "/view/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity viewMessage(){
-        try{
-
-            List<Message> messages = messageService.viewMessage();
-            return ResponseEntity.ok(messages);
-
-        }catch(Exception exception){
-            Map<String, String> error = new HashMap<>();
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(error);
-        }
-    }
-
     @GetMapping(path = "/view/receive", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity viewReceivedMessage(
             @RequestParam(name = "receiver") Long receiverId,
