@@ -38,4 +38,16 @@ public class UserIntegrationTest {
                 .andExpect(jsonPath("$.nickName").value("Ankit"));
 
     }
+
+    @Test
+    public void throwNickNameExistException_WhenNickNameIsSame() throws Exception {
+        String request = "{\"nickName\": \"Ankit\"}";
+        this.mockMvc.perform(post("/user/create")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(request)
+                .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().is4xxClientError())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("$.message").value("NickName already exits"));
+    }
 }
