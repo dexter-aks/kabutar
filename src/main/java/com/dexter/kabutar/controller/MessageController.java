@@ -42,4 +42,33 @@ public class MessageController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(error);
         }
     }
+
+    @GetMapping(path = "/view/receive", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity viewReceivedMessage(
+            @RequestParam(name = "receiver") Long receiverId,
+            @RequestParam(name = "sender", required = false) Long senderId
+            ){
+        try{
+
+            List<String> messages = messageService.viewReceivedMessage(receiverId, senderId);
+            return ResponseEntity.ok(messages);
+
+        }catch(Exception exception){
+            Map<String, String> error = new HashMap<>();
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(error);
+        }
+    }
+
+    @GetMapping(path = "/view/sent", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity viewSentMessage(@RequestParam(name = "sender") Long senderId){
+        try{
+
+            List<String> messages = messageService.viewSentMessage(senderId);
+            return ResponseEntity.ok(messages);
+
+        }catch(Exception exception){
+            Map<String, String> error = new HashMap<>();
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(error);
+        }
+    }
 }
