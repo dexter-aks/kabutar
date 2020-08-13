@@ -4,12 +4,9 @@ import java.util.Objects;
 
 public class MessageInfo {
 
-    private String content;
-    private String senderNickName;
-    private String receiverNickName;
-
-    public MessageInfo() {
-    }
+    private final String content;
+    private final String senderNickName;
+    private final String receiverNickName;
 
     public MessageInfo(String content, String senderNickName, String receiverNickName) {
         this.content = content;
@@ -21,24 +18,12 @@ public class MessageInfo {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public String getSenderNickName() {
         return senderNickName;
     }
 
-    public void setSenderNickName(String senderNickName) {
-        this.senderNickName = senderNickName;
-    }
-
     public String getReceiverNickName() {
         return receiverNickName;
-    }
-
-    public void setReceiverNickName(String receiverNickName) {
-        this.receiverNickName = receiverNickName;
     }
 
     @Override

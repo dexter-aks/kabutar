@@ -33,10 +33,4 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
         }
     }
-
-    @GetMapping(path = "/search/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity findUsers(){
-
-        return ResponseEntity.ok(userService.findUsers());
-    }
 }

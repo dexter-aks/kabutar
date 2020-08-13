@@ -2,7 +2,7 @@ package com.dexter.kabutar;
 
 import org.testcontainers.containers.PostgreSQLContainer;
 
-public class PostgressTestContainer extends PostgreSQLContainer<PostgressTestContainer> {
+public final class PostgressTestContainer extends PostgreSQLContainer<PostgressTestContainer> {
 
     private static final String IMAGE_VERSION = "postgres:11.1";
 

@@ -17,10 +17,6 @@ public class UserInfo {
         return nickName;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
