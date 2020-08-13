@@ -21,7 +21,9 @@ public class MessageServiceImpl implements MessageService {
     private UserRepository userRepository;
 
     @Override
-    public void send(MessageInfo messageInfo) throws InvalidRequestException {
+    public Message send(MessageInfo messageInfo) throws InvalidRequestException {
+        if(messageInfo == null) throw new InvalidRequestException();
+
         String senderNickName = messageInfo.getSenderNickName();
         String receiverNickName = messageInfo.getReceiverNickName();
 
@@ -31,7 +33,7 @@ public class MessageServiceImpl implements MessageService {
         User sender = userRepository.findByNickName(senderNickName);
         User receiver = userRepository.findByNickName(receiverNickName);
         Message message = new Message(messageInfo.getContent(), sender, receiver);
-        messageRepository.save(message);
+        return messageRepository.save(message);
     }
 
     @Override

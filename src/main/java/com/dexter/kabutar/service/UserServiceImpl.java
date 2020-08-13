@@ -7,8 +7,6 @@ import com.dexter.kabutar.model.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UserServiceImpl implements UserService{
 
@@ -22,10 +20,5 @@ public class UserServiceImpl implements UserService{
         }catch(Exception exception){
             throw new NickNameAlreadyExistException();
         }
-    }
-
-    @Override
-    public List<User> findUsers() {
-        return userRepository.findAll();
     }
 }
