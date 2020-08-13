@@ -20,6 +20,13 @@ Amit Kumar Sharma | 340amit@gmail.com
 Body {"nickName":"Amit"}
 
 ### Message
+=======
+### Endpoints
+## User
+1. POST - /user/create - 
+Body {"nickName":"Amit"}
+
+## Message
 1. POST /message/send - 
 Body {"content": "hello", "senderNickname":"Amit", "receiverNickName": "Ravi}
 

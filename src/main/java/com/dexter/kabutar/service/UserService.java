@@ -6,7 +6,5 @@ import com.dexter.kabutar.model.UserInfo;
 
 public interface UserService {
 
-    User save(UserInfo userInfo) throws NickNameAlreadyExistException;
-
-    User findById(Long id);
+    User create(UserInfo userInfo) throws NickNameAlreadyExistException;
 }
